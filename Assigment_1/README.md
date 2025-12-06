@@ -24,9 +24,20 @@ This approach allows clear visibility into:
 - Blocking behavior using `Condition.wait()` when the queue is full or empty
 - Thread coordination using `Condition.notify()` when state changes occur
 
-While `queue.Queue` is appropriate for production systems, implementing the queue manually provides deeper insight into concurrency primitives and makes synchronization logic transparent, which is valuable for learning, interviews, and system design discussions.
+Implementing the queue manually provides deeper insight into concurrency primitives and makes synchronization logic transparent.
 
 ---
+## Project Structure
+
+```bash
+Assigment_1/
+│
+├── synchronized_queue.py          
+├── producer_consumer_service.py       
+├── test_producer_consumer_service.py  
+├── requirements.txt           
+└── README.md                
+```
 
 ## 1. Getting Started
 
@@ -46,7 +57,7 @@ pip install -r requirements.txt
 ### Run Assignment 1
 
 ```bash
-cd assignment1
+cd assignment_1
 python producer_cosumer.py
 ```
 
@@ -87,3 +98,30 @@ The following execution log demonstrates the real-time interaction between the P
 ```bash
 python -m unittest test_producer_consumer.py
 ```
+## Test Coverage
+
+The following components and concurrency scenarios are covered by unit tests to ensure correctness, thread safety, and reliable synchronization of the producer–consumer pipeline:
+
+- **bounded_blocking_queue_put_get**  
+  Validates basic enqueue (`put`) and dequeue (`get`) operations and ensures FIFO ordering.
+
+- **blocking_on_full_queue**  
+  Verifies that the producer thread blocks correctly when the queue reaches its maximum capacity and resumes once space becomes available.
+
+- **blocking_on_empty_queue**  
+  Ensures that the consumer thread blocks when attempting to read from an empty queue and resumes once an item is produced.
+
+- **producer_consumer_end_to_end_flow**  
+  Tests complete data transfer from source container to destination container through the bounded blocking queue.
+
+- **order_preservation**  
+  Confirms that items consumed by the consumer are received in the same order they were produced.
+
+- **sentinel_based_shutdown**  
+  Validates correct handling of the sentinel (poison pill) to ensure graceful consumer shutdown without data loss or deadlocks.
+
+- **empty_source_handling**  
+  Ensures the pipeline behaves correctly when the producer source container is empty.
+
+- **thread_completion_and_cleanup**  
+  Confirms that all threads terminate cleanly and no threads remain blocked after execution.
