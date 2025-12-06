@@ -28,6 +28,17 @@ While `queue.Queue` is appropriate for production systems, implementing the queu
 
 ---
 
+## Project Structure
+```bash
+producer-consumer-python/
+│
+├── blocking_queue.py          # Thread-safe bounded blocking queue
+├── producer_consumer.py       # Producer & Consumer implementation
+├── test_producer_consumer.py  # Unit tests (unittest framework)
+├── requirements.txt           # Python version constraints
+└── README.md                  # Project documentation
+```
+
 ## 1. Getting Started
 
 ### Create and activate a virtual environment
